@@ -1,41 +1,42 @@
 import React from 'react';
 import autobind from 'react-autobind';
-import {Paper, Menu, MenuItem, Divider} from 'material-ui';
-// svg-icons
-import RemoveRedEye from 'material-ui/svg-icons/image/remove-red-eye';
-import PersonAdd from 'material-ui/svg-icons/social/person-add';
-import ContentLink from 'material-ui/svg-icons/content/link';
-import ContentCopy from 'material-ui/svg-icons/content/content-copy';
-import Download from 'material-ui/svg-icons/file/file-download';
-import Delete from 'material-ui/svg-icons/action/delete';
+import {Drawer, Paper, Menu, MenuItem, Divider} from 'material-ui';
 
 class Navigation extends React.Component {
     constructor(props) {
         super(props);
         autobind(this);
+
+        this.state = {
+            open: true
+        };
     }
 
     render() {
-        return (
-            <Paper className="sidebar-wrapper" zDepth={0}>
-                <div className="nav-wrapper">
-                    <div className="logo">
-                        <div className="logo-image"/>
-                    </div>
+        let open = this.state.open;
 
-                    <div className="nav">
-                        <Menu className="nav-content">
-                            <MenuItem primaryText="Preview" leftIcon={<RemoveRedEye />}/>
-                            <MenuItem primaryText="Share" leftIcon={<PersonAdd />}/>
-                            <MenuItem primaryText="Get links" leftIcon={<ContentLink />}/>
-                            <Divider />
-                            <MenuItem primaryText="Make a copy" leftIcon={<ContentCopy />}/>
-                            <MenuItem primaryText="Download" leftIcon={<Download />}/>
-                            <Divider />
-                            <MenuItem primaryText="Remove" leftIcon={<Delete />}/>
-                        </Menu>
+        return (
+            <Paper className="sidebar-wrapper" zDepth={1}>
+                <Drawer open={open}>
+                    <div className="nav-wrapper">
+                        <div className="logo">
+                            <div className="logo-image"/>
+                        </div>
+
+                        <div className="nav">
+                            <Menu className="nav-content">
+                                <MenuItem primaryText="Preview"/>
+                                <MenuItem primaryText="Share"/>
+                                <MenuItem primaryText="Get links"/>
+                                <Divider/>
+                                <MenuItem primaryText="Make a copy"/>
+                                <MenuItem primaryText="Download"/>
+                                <Divider/>
+                                <MenuItem primaryText={<a href="/logout">Logout</a>}/>
+                            </Menu>
+                        </div>
                     </div>
-                </div>
+                </Drawer>
             </Paper>
         );
     }
